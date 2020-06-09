@@ -805,7 +805,7 @@
 
                              }else{
 
-                         //   echo $display = ' <a class="collapse-item" href="/bank/display">Configure Bank Profile</a>';
+                            echo $display = ' <a class="collapse-item" href="/bank/display">Configure Bank Profile</a>';
                             }
                     @endphp
 
