@@ -66,7 +66,7 @@
                                                      $result = \App\LendingKYC::whereId($values->applicant_id)->first();
                                                       echo $result["first_name"] . ' '. $result["last_name"]
                                                         @endphp</td>
-                                                <td>{{$values->loan_duration}}</td>
+                                                <td>{{$values->tenure}}</td>
                                                 <td>{{$values->status}}</td>
                                                 <td>{{$values->amount}}</td>
                                                 <td>{{$values->created_at}}</td>
