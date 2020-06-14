@@ -22,8 +22,7 @@
                                 <a href="{{"/cues/create"}}"><label>Create a key profile</label></a> <br>
 
                                 <br>
-
-                                <div class="box-body">
+                                <div class="box-body"  style="overflow-x:auto;">
 
                                     <!-- /.table-responsive -->
 

@@ -20,7 +20,7 @@
                                 <a href="{{"/internet/fee/createview"}}"><label>Create  Fee Profile</label> </a> <br>
                                 <br>
 
-                                <div class="box-body">
+                                <div class="box-body"  style="overflow-x:auto;">
 
                                     <!-- /.table-responsive -->
 

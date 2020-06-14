@@ -28,7 +28,7 @@
                                     {{$flash}}
                                 </div>
                             @endif
-                            <center><h2 class="h4 text-gray-900 mb-4"><img src="\Capture.PNG"></h2></center>
+                            <center><h2 class="h4 text-gray-900 mb-4"><img src="\Capture.PNG"  style="max-width:100%;height:auto;"></h2></center>
                             <hr>
                             <center><h2 class="h4 text-gray-900 mb-4">Login.</h2></center>
 

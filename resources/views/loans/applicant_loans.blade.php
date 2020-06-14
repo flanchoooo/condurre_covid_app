@@ -32,7 +32,7 @@
                                     <hr>
                                 </div>
 
-                                <div class="box-body">
+                                <div class="box-body"  style="overflow-x:auto;">
                                     <!-- /.table-responsive -->
                                     <table class="table responsive" id="example" width="100%" cellspacing="20">
                                         <thead>

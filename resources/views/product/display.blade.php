@@ -20,7 +20,7 @@
                                 <a href="{{"/product/createview"}}"><label>Create Transaction Type</label></a> <br>
                                 <br>
 
-                                <div class="box-body">
+                                <div class="box-body"  style="overflow-x:auto;">
 
                                     <!-- /.table-responsive -->
 

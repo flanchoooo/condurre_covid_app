@@ -23,9 +23,7 @@
                                 <a href="{{"/luhn/create"}}"><label>Generate Cards</label></a> <br>
 
                                 <br>
-
-                                <div class="box-body">
-
+                                <div class="box-body"  style="overflow-x:auto;">
                                     <!-- /.table-responsive -->
 
                                     <table class="table-responsive" id="example" width="100%" cellspacing="-20">
