@@ -2609,14 +2609,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #36b9cc;
-  border-color: #36b9cc;
+  background-color: #1cc88a;
+  border-color: #1cc88a;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #36b9cc;
-  border-color: #36b9cc;
+  background-color: #1cc88a;
+  border-color: #1cc88a ;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -6324,6 +6324,9 @@ a.close.disabled {
     max-width: 1140px;
   }
 }
+
+
+
 
 .tooltip {
   position: absolute;
@@ -10678,23 +10681,23 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background-color: #83d2d9;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #83d2d9), to(#224abe));
-  background-image: linear-gradient(180deg, #4ecedf 10%, #4eb1df 100%);
+  background-color: #34C46F;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #34C46F), to(#34C46F));
+  background-image: linear-gradient(180deg, #34C46F 10%, #34C46F 100%);
   background-size: cover;
 }
 
 .bg-gradient-success {
-  background-color: #1cc88a;
+  background-color: #34C46F;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #1cc88a), to(#13855c));
   background-image: linear-gradient(180deg, #1cc88a 10%, #13855c 100%);
   background-size: cover;
 }
 
 .bg-gradient-info {
-  background-color: #36b9cc;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #36b9cc), to(#258391));
-  background-image: linear-gradient(180deg, #36b9cc 10%, #258391 100%);
+  background-color: #34C46F;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #34C46F), to(#34C46F));
+  background-image: linear-gradient(180deg, #34C46F 10%, #34C46F 100%);
   background-size: cover;
 }
 
