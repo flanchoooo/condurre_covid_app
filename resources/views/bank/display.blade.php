@@ -20,7 +20,7 @@
                                 </div>
 
 
-                                <a href="{{"/loans/disburse"}}"><label>Disburse</label> </a> <br>
+                                <a href="{{"/bank/createview"}}"><label>Create Bank Profile</label> </a> <br>
 
                                 <br>
 
