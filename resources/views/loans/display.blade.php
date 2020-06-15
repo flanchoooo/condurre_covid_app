@@ -2,6 +2,11 @@
 
 
 @section('content')
+
+
+
+
+
     <div class="row justify-content-center">
 
         <div class="col-xl-11">
@@ -40,7 +45,7 @@
                                 <br>
                                 <div class="box-body"  style="overflow-x:auto;">
                                     <!-- /.table-responsive -->
-                                    <table class="table-responsive" id="example" width="100%" cellspacing="-20">
+                                    <table class="table responsive" id="example" width="100%" cellspacing="0">
                                         <thead>
                                         <tr>
 

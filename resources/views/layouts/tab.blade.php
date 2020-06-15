@@ -96,7 +96,7 @@
                               }else{
 
 
-                          echo $display = '<a class="collapse-item" href="/transactions/statistics">Dashboards</a>';
+                          echo $display = '<a class="collapse-item" href="/loans/book">Dashboards</a>';
 
                              }
                     @endphp
@@ -119,7 +119,7 @@
 
                               }else{
 
-                             echo $display = ' <a  class="collapse-item" href="/transactions/wallet">Wallet Transactions</a>';
+                           //  echo $display = ' <a  class="collapse-item" href="/transactions/wallet">Wallet Transactions</a>';
                              }
                     @endphp
 
@@ -314,7 +314,7 @@
 
             }else{
 
-           echo $display = '  <hr class="sidebar-divider"><div class="sidebar-heading">Wallet & Loan Services</div>';
+           echo $display = '  <hr class="sidebar-divider"><div class="sidebar-heading">Loan Services</div>';
            }
     @endphp
 
@@ -333,10 +333,11 @@
 
                       else{
 
-                     echo $display = ' <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWallet" aria-expanded="true" aria-controls="collapseTwo">
+                    /* echo $display = ' <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWallet" aria-expanded="true" aria-controls="collapseTwo">
                                        <i class="fas fa-fw fa-wallet"></i>
                                          <span>Wallets</span>
                                         </a>';
+                    */
                      }
             @endphp
 
@@ -494,7 +495,7 @@
 
 
 
-                           //  echo $display = ' <a  class="collapse-item" href="/loans/cos">Loans COS</a>';
+                             echo $display = ' <a  class="collapse-item" href="/loan/disbursement">Loan Disbursements</a>';
 
 
                              }
@@ -546,14 +547,14 @@
 
             }else{
 
-           echo $display = '<hr class="sidebar-divider"><div class="sidebar-heading">Card Management</div>';
+           //echo $display = '<hr class="sidebar-divider"><div class="sidebar-heading">Card Management</div>';
            }
     @endphp
 
 
 
     <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
+        <!--<li class="nav-item"> -->
 
             @php
                 if(!isset($role->acc)|| trim($role->acc) == ''){
@@ -561,11 +562,11 @@
 
                       }else{
 
-                     echo $display = ' <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    /* echo $display = ' <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                        <i class="fas fa-fw fa-folder"></i>
                                          <span>Card Management</span>
-                                        </a>';
-                     }
+                                       </a>';
+                   */   }
             @endphp
 
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -702,11 +703,11 @@
 
                       }else{
 
-                     echo $display = ' <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                    /* echo $display = ' <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                                       <i class="fas fa-fw fa-credit-card"></i>
                                       <span>Card Production</span>
                                      </a>';
-                     }
+                    */ }
             @endphp
 
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -718,7 +719,8 @@
 
                               }else{
 
-                             echo $display = ' <a  class="collapse-item" href="/card/display">Configure Card Types</a>';
+                             //echo $display = ' <a  class="collapse-item" href="/card/display">Configure Card Types</a>';
+                             echo $display = ' <a  class="collapse-item" href="/card/display">Loan Class of Service</a>';
                              }
                     @endphp
 
@@ -744,7 +746,7 @@
 
             @php
                 if(!isset($role->transaction_manager)|| trim($role->transaction_manager) == ''){
-                      echo '';
+                      //echo '';post
 
                       }else{
 
@@ -764,7 +766,8 @@
 
                              }else{
 
-                             echo $display = ' <a class="collapse-item" href="/product/display">Configure Txn Types</a>';
+                             //echo $display = ' <a class="collapse-item" href="/product/display">Configure Txn Types</a>';
+                             echo $display = ' <a class="collapse-item" href="/loans/cos/display">Loan Class of Service</a>';
                             }
                     @endphp
 
@@ -795,7 +798,7 @@
 
                             }else{
 
-                           echo $display = ' <a  class="collapse-item" href="/internet_fees/display">Configure Wallet Fees</a>';
+                          // echo $display = ' <a  class="collapse-item" href="/internet_fees/display">Configure  Fees</a>';
                            }
                     @endphp
 
@@ -917,7 +920,7 @@
 
                              }else{
 
-                            echo $display = ' <a class="collapse-item" href="/logs/display">View User Logs</a>';
+                          //  echo $display = ' <a class="collapse-item" href="/logs/display">View User Logs</a>';
                             }
                     @endphp
 

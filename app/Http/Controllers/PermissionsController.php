@@ -56,14 +56,26 @@ class PermissionsController extends Controller
     }
 
     public function update(Request $request){
-
-    //return $request->all();
-
         AuthService::getAuth(Auth::user()->role_permissions_id, 'users');
+        Permissions::where('id', $request->id)->update([
+            'loans_approve'                 => $request->loans_approve,
+            'dashboard'                     => $request->dashboard,
+            'loans_authorize'               => $request->loans_authorize,
+            'loans_profile'                 => $request->loans_profile,
+            'loan_configurations'           => $request->loan_configurations,
+            'transaction_manager'           => $request->transaction_manager,
+            'users'                         => $request->users,
+            'reports'                       => $request->reports,
+
+        ]);
+
+
+
+
 
      //return $request->all();
         AuthService::getAuth(Auth::user()->role_permissions_id, 'users');
-        Permissions::where('id', $request->id)->update([
+        /*Permissions::where('id', $request->id)->update([
             'wallet_configs'         => $request->wallet_configs,
             'transaction_manager'    => $request->transaction_manager,
             'dashboard'              => $request->dashboard,
@@ -101,6 +113,7 @@ class PermissionsController extends Controller
             'rtgs'                   => $request->rtgs,
             'corporate'             => $request->corporate,
         ]);
+        */
 
         return redirect('/permissions/display');
 

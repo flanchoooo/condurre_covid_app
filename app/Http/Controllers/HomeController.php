@@ -27,6 +27,6 @@ class HomeController extends Controller
 
     {
         //return '';
-        return redirect('/internet/dashboard');
+        return redirect('/loans/book');
     }
 }

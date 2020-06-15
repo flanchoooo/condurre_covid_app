@@ -343,8 +343,15 @@ Route::get('/loans/book', ['uses' => 'LoansController@loanBook', 'as' => 'Admin'
 Route::post('/loans/profile', ['uses' => 'LoansController@applicant', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
 Route::post('/loans/installments', ['uses' => 'LoansController@installments', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
 Route::post('/loans/payment', ['uses' => 'LoansController@payment', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']])->name('makePayment');
-Route::get('/loans/profile', ['uses' => 'LoansController@profile', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']])->name('makePayment');
-Route::post('/loans/search', ['uses' => 'LoansController@search', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']])->name('makePayment');
+Route::get('/loans/profile', ['uses' => 'LoansController@profile', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
+Route::post('/loans/search', ['uses' => 'LoansController@search', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
+Route::get('/loan/disbursement', ['uses' => 'LoansController@disbursements', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
+Route::get('/loans/disburse', ['uses' => 'LoansController@disburse', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
+Route::get('/loans/cos/display', ['uses' => 'LoansController@displayCOS', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
+Route::get('/loans/cos/create', ['uses' => 'LoansController@createCOS', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
+Route::post('/loan/cos/creates', ['uses' => 'LoansController@creates', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
+Route::post('/loan/cos/id', ['uses' => 'LoansController@cosId', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
+Route::post('/loan/cos/updates', ['uses' => 'LoansController@updates', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
 
 
 Route::POST('/login/internet/preauth', [ 'uses' =>'AuthServerController@login_service']);
