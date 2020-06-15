@@ -34,7 +34,7 @@
                 "order": [[0, "desc"]],
                 dom: 'Bfrtip',
                 buttons: [
-                    'csv', 'excel', 'pdf', 'print'
+                    'csv', 'excel','print'
                 ]
             } );
         });
@@ -55,9 +55,12 @@
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
             <div class="sidebar-brand-icon rotate-n-15">
 
+
             </div>
             <div class="sidebar-brand-text mx-3">INSTAKASH</div>
         </a>
+
+
 
         <hr class="sidebar-divider my-0">
 
@@ -1006,7 +1009,7 @@
 
             <!-- Topbar -->
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
+                <a href="{{ URL::previous() }}"><i class="fas fa-angle-left fa-lg"></i></a>
                 <!-- Sidebar Toggle (Topbar) -->
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                     <i class="fa fa-bars"></i>
