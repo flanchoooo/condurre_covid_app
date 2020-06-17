@@ -28,7 +28,7 @@
                                             <th></th>
 
 
-                                        </tr>
+                          ol              </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($records as $record)
