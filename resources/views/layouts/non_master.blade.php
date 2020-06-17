@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>INSTAKASH</title>
+    <title>Condurre</title>
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css' ) }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('datatable/font.css' ) }}" rel="stylesheet" type="text/css">

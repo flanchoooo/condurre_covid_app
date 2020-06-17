@@ -36,7 +36,7 @@ class LoginController extends Controller
 
 
 
-    protected $redirectTo = '/internet/dashboard';
+    protected $redirectTo = '/home/page';
 
     protected $username;
 
@@ -79,7 +79,38 @@ class LoginController extends Controller
     }
 
 
+    protected function login(Request $request)
+    {
+        try {
+            $client = new Client();
+            $result = $client->post(env('BASE_URL').'/company-admins/login', [
+                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
+                'headers' => ['Content-type' => 'application/json',],
+                'json' => [
+                    'password'          => $request->password,
+                    'email'             => $request->login,
+                ],
+            ]);
 
+            $rec =  $result->getBody()->getContents();
+            $response = json_decode($rec);
+            $this->validateLogin($request);
+            if ($this->hasTooManyLoginAttempts($request)) {
+                $this->fireLockoutEvent($request);
+                return $this->sendLockoutResponse($request);
+            }
+            if ($this->attemptLogin($request)) {
+                return $this->sendLoginResponse($request);
+            }
+            $this->incrementLoginAttempts($request);
+            return $this->sendFailedLoginResponse($request);
+
+        }
+        catch (ClientException $e){
+            session()->flash('error','Invalid username or password.'.$e->getMessage());
+            return view('auth.login');
+        }
+    }
 
 
 }

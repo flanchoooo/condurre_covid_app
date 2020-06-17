@@ -12,7 +12,7 @@
                         <div class="col-lg-12">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <center><h2 class="h4 text-gray-900 mb-4"><img src="\Capture.PNG"  style="max-width:100%;height:auto;"></h2></center>
+                                    <center><h2 class="h4 text-gray-900 mb-4"><img src="\logos.png"  style="max-width:60%;height:auto;"></h2></center>
                                     <hr>
                                     <h1 class="h4 text-gray-900 mb-4">Register</h1>
                                 </div>
@@ -21,16 +21,16 @@
                                     $("document").ready(function(){
                                         setTimeout(function(){
                                             $("div.alert").remove();
-                                        }, 2000 ); // 5 secs
+                                        }, 9000 ); // 5 secs
 
                                     });
                                 </script>
 
-                                @if ($flash = session('notification'))
+                                @if ($flash = session('registration_notification'))
 
                                     @php
 
-                                    if(session('notification') == 'Operation completed.'){
+                                    if(session('notification') == 'User Account successfuly created.'){
 
                                     echo '<center><div  class="alert alert-success" role="alert">'.$flash
                                         .'</div></center>';

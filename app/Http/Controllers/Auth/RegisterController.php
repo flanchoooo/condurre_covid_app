@@ -70,23 +70,45 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
-
-
-    {
-
+    protected function create(array $data){
         return User::create([
             'name' => $data['name'].' '.$data['lastname'],
             'email' => $data['email'],
             'username' => $data['username'],
             'password' => Hash::make($data['password']),
         ]);
-
-
-
     }
 
 
-
+    public function register(Request $request)
+    {
+        try {
+            $client = new Client();
+            $result = $client->post('http://144.91.64.120:35600/api/company-admins', [
+                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
+                'headers' => [
+                    'Content-type' => 'application/json'
+                ],
+                'json' => [
+                    'company_id'            => 81,
+                    'first_name'            => $request->name,
+                    'middle_names'          => $request->name,
+                    'last_name'             => $request->lastname,
+                    'email'                 => $request->email,
+                    'password'              => $request->password,
+                ],
+            ]);
+            //$rec =  $result->getBody()->getContents();
+           // $response = json_decode($rec);
+            $this->validator($request->all())->validate();
+            event(new Registered($user = $this->create($request->all())));
+            session()->flash('registration_notification',  'User Account successfuly created.');
+            return  redirect('/register');
+        }
+        catch (\Exception $e){
+            session()->flash('registration_notification',  $e->getMessage());
+            return  redirect('/register');
+        }
+    }
 
 }

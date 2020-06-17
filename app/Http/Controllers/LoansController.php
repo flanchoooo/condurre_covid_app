@@ -51,6 +51,7 @@ class LoansController extends Controller
     }
 
     public function loanBook(Request $request){
+        return view('home.home');
         AuthService::getAuth(Auth::user()->role_permissions_id, 'loans');
         try {
             $client = new Client();

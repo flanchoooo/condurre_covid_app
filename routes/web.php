@@ -354,6 +354,29 @@ Route::post('/loan/cos/id', ['uses' => 'LoansController@cosId', 'as' => 'Admin',
 Route::post('/loan/cos/updates', ['uses' => 'LoansController@updates', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
 
 
+
+//Company
+Route::get('/home/page', ['uses' => 'CondurreAppController@homePage', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
+Route::get('/company/display', 'CondurreAppController@displayCompanies');
+Route::get('/company/create', 'CondurreAppController@createCompany');
+Route::post('/company/creates', 'CondurreAppController@createsCompany');
+Route::post('/company/id', 'CondurreAppController@companyById');
+Route::any('/company/updates', 'CondurreAppController@updatesCompany');
+
+
+Route::get('/company/exams', 'CondurreAppController@displayExams');
+Route::get('/exam/create', 'CondurreAppController@createExam');
+Route::any('/exam/creates', 'CondurreAppController@createsExam');
+Route::any('/exam/id', 'CondurreAppController@examById');
+Route::any('/exam/updates', 'CondurreAppController@updatesExam');
+Route::any('/exam/questions', 'CondurreAppController@examQuestions');
+Route::any('/exam/questions/possible/answers', 'CondurreAppController@possibleAnswers');
+
+
+
+
+
+
 Route::POST('/login/internet/preauth', [ 'uses' =>'AuthServerController@login_service']);
 
 Route::get('/migrate','MigrationsController@index');

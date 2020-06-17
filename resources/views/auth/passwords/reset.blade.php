@@ -18,8 +18,7 @@
                         <div class="col-lg-12">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <center><h2 class="h4 text-gray-900 mb-4"><img src="\Capture.PNG"  style="max-width:100%;height:auto;"></h2></center>
-                                    <hr>
+                                    <center><h2 class="h4 text-gray-900 mb-4"><img src="\logos.png"  style="max-width:60%;height:auto;"></h2></center>
                                     <h1 class="h4 text-gray-900 mb-4">Password Reset</h1>
                                 </div>
 
@@ -29,7 +28,7 @@
                                             $("div.alert").remove();
                                         }, 2000 ); // 5 secs
 
-                                    });
+                                    });a
                                 </script>
 
                                 @if ($flash = session('notification'))

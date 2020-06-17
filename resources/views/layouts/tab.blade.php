@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>INSTAKASH</title>
+    <title>Condurre</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css' ) }}" rel="stylesheet" type="text/css">
@@ -57,7 +57,7 @@
 
 
             </div>
-            <div class="sidebar-brand-text mx-3">INSTAKASH</div>
+            <div class="sidebar-brand-text mx-3">Condurre App</div>
         </a>
 
 
@@ -99,7 +99,8 @@
                               }else{
 
 
-                          echo $display = '<a class="collapse-item" href="/loans/book">Dashboards</a>';
+                          echo $display = '<a class="collapse-item" href="/home/page">Dashboards</a>';
+                          echo $display = '<a class="collapse-item" href="/home/page">Visit Reports</a>';
 
                              }
                     @endphp
@@ -317,7 +318,7 @@
 
             }else{
 
-           echo $display = '  <hr class="sidebar-divider"><div class="sidebar-heading">Loan Services</div>';
+           echo $display = '  <hr class="sidebar-divider"><div class="sidebar-heading">Company Services</div>';
            }
     @endphp
 
@@ -453,14 +454,14 @@
 
                      echo $display = ' <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#loans" aria-expanded="true" aria-controls="collapseTwo">
                                        <i class="fas fa-fw fa-dollar-sign"></i>
-                                         <span>Loans</span>
+                                         <span>Company</span>
                                         </a>';
                      }
             @endphp
 
             <div id="loans" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Loan Management</h6>
+                    <h6 class="collapse-header">Company Management</h6>
 
 
                     @php
@@ -470,7 +471,8 @@
                               }else{
 
 
-                          echo $display = '<a class="collapse-item" href="/loans/display">Loan Applications</a>';
+                            echo $display = '<a class="collapse-item" href="/company/display">Company Management</a>';
+                            echo $display = '<a class="collapse-item" href="/company/exams">Exam Configurations</a>';
 
                              }
                     @endphp
@@ -483,7 +485,7 @@
 
 
 
-                          echo $display = '<a class="collapse-item" href="/loans/profile">Applicant Profile</a>';
+                        //  echo $display = '<a class="collapse-item" href="/loans/profile">Exam Configurations</a>';
 
 
 
@@ -498,7 +500,7 @@
 
 
 
-                             echo $display = ' <a  class="collapse-item" href="/loan/disbursement">Loan Disbursements</a>';
+                          //   echo $display = ' <a  class="collapse-item" href="/loan/disbursement">Loan Disbursements</a>';
 
 
                              }
@@ -526,7 +528,7 @@
 
 
 
-                             echo $display = ' <a  class="collapse-item" href="/loans/book">Loan Book</a>';
+                            // echo $display = ' <a  class="collapse-item" href="/loans/book">Loan Book</a>';
 
 
                              }
@@ -769,8 +771,8 @@
 
                              }else{
 
-                             //echo $display = ' <a class="collapse-item" href="/product/display">Configure Txn Types</a>';
-                             echo $display = ' <a class="collapse-item" href="/loans/cos/display">Loan Class of Service</a>';
+                             echo $display = ' <a class="collapse-item" href="/product/display">Administrators</a>';
+                             echo $display = ' <a class="collapse-item" href="/loans/cos/display">Visitors</a>';
                             }
                     @endphp
 
@@ -811,7 +813,7 @@
 
                              }else{
 
-                            echo $display = ' <a class="collapse-item" href="/bank/display">Configure Bank Profile</a>';
+                          //  echo $display = ' <a class="collapse-item" href="/bank/display">Configure Bank Profile</a>';
                             }
                     @endphp
 
@@ -1074,7 +1076,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Insta 2020</span>
+                    <span>Copyright &copy; Condurre 2020</span>
                 </div>
             </div>
         </footer>

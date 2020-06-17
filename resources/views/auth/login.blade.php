@@ -25,12 +25,12 @@
 
                             @if ($flash = session('error'))
                                 <div  class="alert alert-danger" role="alert">
-                                    {{$flash}}
+                                    <center>{{$flash}}</center>
                                 </div>
                             @endif
-                            <center><h2 class="h4 text-gray-900 mb-4"><img src="\Capture.PNG"  style="max-width:100%;height:auto;"></h2></center>
+                            <center><h2 class="h4 text-gray-900 mb-4"><img src="\logos.png"  style="max-width:60%;height:auto;"></h2></center>
                             <hr>
-                            <center><h2 class="h4 text-gray-900 mb-4">Login.</h2></center>
+                            <center><h2 class="h4 text-gray-900 mb-4">Login</h2></center>
 
                             <form  method="POST" action="{{ route('login') }}">
                                 @csrf
