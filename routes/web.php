@@ -373,7 +373,11 @@ Route::any('/exam/questions', 'CondurreAppController@examQuestions');
 Route::any('/exam/questions/possible/answers', 'CondurreAppController@possibleAnswers');
 
 
-
+//Company
+Route::get('/company-admin/display', 'CondurreAppController@displayCompaniesAdmin');
+Route::post('/company-admin/id', 'CondurreAppController@companyAdminsById');
+Route::post('/company-admin/create', 'CondurreAppController@createCompanyAdmin');
+Route::any('/company-admin/updates', 'CondurreAppController@updatesCompanyAdmin');
 
 
 

@@ -71,8 +71,6 @@
         @endphp
 
         <li class="nav-item">
-
-
             @php
 
                 if(!isset($role->dashboard)|| trim($role->dashboard) == ''){
@@ -771,7 +769,7 @@
 
                              }else{
 
-                             echo $display = ' <a class="collapse-item" href="/product/display">Administrators</a>';
+                             echo $display = ' <a class="collapse-item" href="/company-admin/display">Administrators</a>';
                              echo $display = ' <a class="collapse-item" href="/loans/cos/display">Visitors</a>';
                             }
                     @endphp
