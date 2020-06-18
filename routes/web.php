@@ -376,8 +376,15 @@ Route::any('/exam/questions/possible/answers', 'CondurreAppController@possibleAn
 //Company
 Route::get('/company-admin/display', 'CondurreAppController@displayCompaniesAdmin');
 Route::post('/company-admin/id', 'CondurreAppController@companyAdminsById');
+Route::post('/company-admin-view/id', 'CondurreAppController@companyAdminsViewByCompanyId');
 Route::post('/company-admin/create', 'CondurreAppController@createCompanyAdmin');
-Route::any('/company-admin/updates', 'CondurreAppController@updatesCompanyAdmin');
+Route::post('/company-admin-edit', 'CondurreAppController@updateCompanyAdmins');
+Route::post('/company-admin/updates', 'CondurreAppController@updateCompanyAdminsPost');
+
+//visitors
+Route::get('/visitors/display', 'CondurreAppController@displayVisitors');
+Route::post('/visitor-edit', 'CondurreAppController@displayVisitorById');
+Route::post('/visitor/updates', 'CondurreAppController@updateVisitor');
 
 
 

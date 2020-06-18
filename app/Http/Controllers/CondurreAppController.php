@@ -294,4 +294,134 @@ class CondurreAppController extends Controller
         }
     }
 
+    public function companyAdminsViewByCompanyId(Request $request)
+    {
+        try {
+            $client = new Client();
+            $result = $client->get(env('BASE_URL') . '/company-admins', [
+                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
+                'headers' => ['Content-type' => 'application/json'],
+                'json' => [
+                    'size' => 10000
+                ]
+            ]);
+            $rec = $result->getBody()->getContents();
+            $response = json_decode($rec);
+
+
+            return view('company-admin.display-admin')->with('records', $response->pageable->content);
+        } catch (\Exception $e) {
+            session()->flash('registration_notification', $e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+    public function updateCompanyAdmins(Request $request)
+    {
+        try {
+            $client = new Client();
+            $result = $client->get(env('BASE_URL') . '/company-admins/' . $request->input('id'), [
+                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
+                'headers' => ['Content-type' => 'application/json'],
+            ]);
+            $rec = $result->getBody()->getContents();
+            $response = json_decode($rec);
+            return view('company-admin.update')->with(['companyAdmin' => $response->model]);
+        } catch (\Exception $e) {
+            session()->flash('registration_notification', $e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+    public function updateCompanyAdminsPost(Request $request)
+    {
+        // return $request->all();
+        try {
+            $client = new Client();
+            $result = $client->put(env('BASE_URL') . '/company-admins', [
+                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
+                'headers' => ['Content-type' => 'application/json'],
+                'json' => [
+                    'id' => $request->input('id'),
+                    'first_name' => $request->input('first_name'),
+                    'middle_names' => $request->input('middle_names'),
+                    'last_name' => $request->input('last_name'),
+                    'email' => $request->input('email'),
+                    'password' => $request->input('password')
+                ]
+            ]);
+            return $rec = $result->getBody()->getContents();
+            return redirect('/exam/display');
+        } catch (\Exception $e) {
+            return $e;
+            session()->flash('error', $e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+
+    ///// VISITORS
+    public function displayVisitors()
+    {
+        try {
+            $client = new Client();
+            $result = $client->get(env('BASE_URL') . '/visitors', [
+                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
+                'headers' => ['Content-type' => 'application/json'],
+                'json' => [
+                    'size' => 10000
+                ]
+            ]);
+            $rec = $result->getBody()->getContents();
+            $response = json_decode($rec);
+            return view('visitors.display')->with('records', $response->pageable->content);
+        } catch (\Exception $e) {
+            session()->flash('registration_notification', $e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+    public function displayVisitorById(Request $request)
+    {
+        try {
+            $client = new Client();
+            $result = $client->get(env('BASE_URL') . '/visitors/' . $request->input('id'), [
+                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
+                'headers' => ['Content-type' => 'application/json'],
+                'json' => [
+                    'size' => 10000
+                ]
+            ]);
+            $rec = $result->getBody()->getContents();
+            $response = json_decode($rec);
+            return view('visitors.update')->with('record', $response->model);
+        } catch (\Exception $e) {
+            session()->flash('registration_notification', $e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+    public function updateVisitor(Request $request){
+        //print_r(json_encode($request->input()));
+        try {
+            $client = new Client();
+            $result = $client->put(env('BASE_URL') . '/visitors', [
+                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
+                'headers' => ['Content-type' => 'application/json'],
+                'json' => [
+                    'id' => $request->input('id'),
+                    'first_name' => $request->input('first_name'),
+                    'last_name' => $request->input('last_name'),
+                    'middle_names' => $request->input('middle_names'),
+                    'email' => $request->input('email'),
+                    'password' => $request->input('password'),
+                ]
+            ]);
+            $rec = $result->getBody()->getContents();
+            return redirect('/visitors/display');
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+            return redirect()->back();
+        }
+    }
 }

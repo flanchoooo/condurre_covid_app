@@ -770,7 +770,7 @@
                              }else{
 
                              echo $display = ' <a class="collapse-item" href="/company-admin/display">Administrators</a>';
-                             echo $display = ' <a class="collapse-item" href="/loans/cos/display">Visitors</a>';
+                             echo $display = ' <a class="collapse-item" href="/visitors/display">Visitors</a>';
                             }
                     @endphp
 

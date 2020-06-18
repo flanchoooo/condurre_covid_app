@@ -27,6 +27,7 @@
                                             <th>Longtitude</th>
                                             <th>Latitude</th>
                                             <th></th>
+                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -36,6 +37,13 @@
                                                 <td>{{$record->name}}</td>
                                                 <td>{{$record->latitute}}</td>
                                                 <td>{{$record->longitute}}</td>
+                                                <td>
+                                                    <form role="form" action="/company-admin-view/id" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->id}}"  name="id" >
+                                                        <center><button type="submit" class="btn btn-warning">View Admins</button></center>
+                                                    </form>
+                                                </td>
                                                 <td>
                                                     <form role="form" action="/company-admin/id" method="POST">
                                                         @csrf
