@@ -16,7 +16,7 @@ class CondurreAppController extends Controller
     {
         try {
             $client = new Client();
-            $result = $client->get(env('BASE_URL') . '/companies', [
+            $result = $client->get(env('BASE_URL') . '/companies?page=0&size=1000000', [
                 //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
                 'headers' => ['Content-type' => 'application/json'],
                 'json' => [
@@ -103,8 +103,7 @@ class CondurreAppController extends Controller
     {
         try {
             $client = new Client();
-            $result = $client->get(env('BASE_URL') . '/exams', [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
+            $result = $client->get(env('BASE_URL') . '/exams?page=0&size=1000000', [
                 'headers' => ['Content-type' => 'application/json'],
                 'json' => [
                     'size' => 10000
@@ -114,8 +113,14 @@ class CondurreAppController extends Controller
             $response = json_decode($rec);
             return view('exam.display')->with('records', $response->pageable->content);
         } catch (\Exception $e) {
-            session()->flash('registration_notification', $e->getMessage());
-            return redirect()->back();
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
+                return redirect('/company/exams');
+            }
+            session()->flash('error', $e->getMessage());
+            return redirect('/company/exams');
         }
     }
 
@@ -140,8 +145,14 @@ class CondurreAppController extends Controller
             $rec = $result->getBody()->getContents();
             return redirect('/company/exams');
         } catch (\Exception $e) {
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
+                return redirect('/company/exams');
+            }
             session()->flash('error', $e->getMessage());
-            return redirect()->back();
+            return redirect('/company/exams');
         }
     }
 
@@ -159,8 +170,14 @@ class CondurreAppController extends Controller
             session()->flash('name', $response->model->exam_title);
             return view('exam.update');
         } catch (\Exception $e) {
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
+                return redirect('/company/exams');
+            }
             session()->flash('error', $e->getMessage());
-            return redirect()->back();
+            return redirect('/company/exams');
         }
     }
 
@@ -179,18 +196,22 @@ class CondurreAppController extends Controller
                     'id' => $request->id,
                 ]
             ]);
-            return $rec = $result->getBody()->getContents();
+             $rec = $result->getBody()->getContents();
             return redirect('/exam/display');
         } catch (\Exception $e) {
-            return $e;
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
+                return redirect('/company/exams');
+            }
             session()->flash('error', $e->getMessage());
-            return redirect()->back();
+            return redirect('/company/exams');
         }
     }
 
     public function examQuestions(Request $request)
     {
-        // return $request->all();
         try {
             $client = new Client();
             $result = $client->get(env('BASE_URL') . '/exams/' . $request->id, [
@@ -198,18 +219,24 @@ class CondurreAppController extends Controller
                 'headers' => ['Content-type' => 'application/json'],
             ]);
             $rec = $result->getBody()->getContents();
+            session()->flash('exam_id',$request->id);
             $response = json_decode($rec)->model->questions;
             return view('exam.questions')->with(['records' => $response]);
         } catch (\Exception $e) {
-            return $e;
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
+                return redirect('/company/exams');
+            }
             session()->flash('error', $e->getMessage());
-            return redirect()->back();
+            return redirect('/company/exams');
         }
     }
 
     public function possibleAnswers(Request $request)
     {
-        //  return $request->all();
+
         try {
             $client = new Client();
             $result = $client->get(env('BASE_URL') . '/questions/' . $request->id, [
@@ -220,11 +247,17 @@ class CondurreAppController extends Controller
             $response = json_decode($rec);
             $res = $response->model->question_choices;
             session()->flash('question_text', $request->question_text);
+            session()->flash('questions_id', $request->id);
             return view('exam.answers')->with(['records' => $res]);
         } catch (\Exception $e) {
-            return $e;
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
+                return redirect('/company/exams');
+            }
             session()->flash('error', $e->getMessage());
-            return redirect()->back();
+            return redirect('/company/exams');
         }
     }
 
@@ -234,7 +267,7 @@ class CondurreAppController extends Controller
     {
         try {
             $client = new Client();
-            $result = $client->get(env('BASE_URL') . '/companies', [
+            $result = $client->get(env('BASE_URL') . '/companies?page=0&size=1000000', [
                 //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
                 'headers' => ['Content-type' => 'application/json'],
                 'json' => [
@@ -298,7 +331,7 @@ class CondurreAppController extends Controller
     {
         try {
             $client = new Client();
-            $result = $client->get(env('BASE_URL') . '/company-admins', [
+            $result = $client->get(env('BASE_URL') . '/company-admins?page=0&size=1000000', [
                 //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
                 'headers' => ['Content-type' => 'application/json'],
                 'json' => [
@@ -350,7 +383,7 @@ class CondurreAppController extends Controller
                     'password' => $request->input('password')
                 ]
             ]);
-            return $rec = $result->getBody()->getContents();
+             $rec = $result->getBody()->getContents();
             return redirect('/exam/display');
         } catch (\Exception $e) {
             return $e;
@@ -365,7 +398,7 @@ class CondurreAppController extends Controller
     {
         try {
             $client = new Client();
-            $result = $client->get(env('BASE_URL') . '/visitors', [
+            $result = $client->get(env('BASE_URL') . '/visitors?page=0&size=1000000', [
                 //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
                 'headers' => ['Content-type' => 'application/json'],
                 'json' => [
@@ -402,7 +435,6 @@ class CondurreAppController extends Controller
     }
 
     public function updateVisitor(Request $request){
-        //print_r(json_encode($request->input()));
         try {
             $client = new Client();
             $result = $client->put(env('BASE_URL') . '/visitors', [
@@ -424,4 +456,207 @@ class CondurreAppController extends Controller
             return redirect()->back();
         }
     }
+
+    public function createQuestion(Request $request){
+        session()->flash('id',$request->id);
+        return view('exam.create_question');
+
+    }
+
+    ////////QUESTIONS
+
+    public function createsQuestions(Request $request)
+    {
+        try {
+            $client = new Client();
+            $result = $client->post(env('BASE_URL') . '/questions', [
+                'headers' => ['Content-type' => 'application/json'],
+                'json' => [
+                    'question_text' => $request->question_text,
+                    'active' => $request->active,
+                    'exam_id' => $request->exam_id,
+                    'difficult_level' => $request->difficult_level,
+                ]
+            ]);
+            $rec = $result->getBody()->getContents();
+            return redirect('/company/exams');
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+    public function updateQuestions(Request $request){
+        session()->flash('id',$request->id);
+        session()->flash('question_text',$request->question_text);
+        session()->flash('exam_id',  session('exam_id'));
+        return view('exam.update_question');
+
+    }
+
+    public function updatesQuestions(Request $request)
+    {
+
+        try {
+            $client = new Client();
+            $result = $client->put(env('BASE_URL') . '/questions', [
+                'headers' => ['Content-type' => 'application/json'],
+                'json' => [
+                    'id' => $request->question_id,
+                    'exam_id' => $request->question_id,
+                    'question_text' => $request->question_text,
+                    'difficult_level' => $request->difficult_level,
+                    'active' => $request->active,
+                    'duration' => 30,
+                    'company_admin_id' => 21,
+
+                ]
+            ]);
+            $rec = $result->getBody()->getContents();
+            return redirect('/company/exams');
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+
+    //////////Answers
+    public function createAnswers(Request $request){
+        session()->flash('id',$request->id);
+        session()->flash('question_text',$request->question_text);
+       return view('exam.create_answer');
+
+   }
+
+    public function createsAnswers(Request $request)
+    {
+     //   return $request->all();
+        try {
+            $client = new Client();
+            $result = $client->post(env('BASE_URL') . '/question-choices', [
+                'headers' => ['Content-type' => 'application/json'],
+                'json' => [
+                    'question_choice_text'  => $request->question_choice_text,
+                    'question_id'           => $request->question_id,
+                    'correct'               => $request->correct,
+                ]
+            ]);
+            $rec = $result->getBody()->getContents();
+            return redirect('/company/exams');
+        } catch (\Exception $e) {
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
+                return redirect('/company/exams');
+            }
+            session()->flash('error', $e->getMessage());
+            return redirect('/company/exams');
+        }
+    }
+
+    public function updatesAnswers(Request $request){
+        session()->flash('id',$request->id);
+        session()->flash('question_choice_text',$request->question_choice_text);
+        session()->flash('question_text',session('question_text'));
+        session()->flash('questions_id',  session('questions_id'));
+        return view('exam.update_answer');
+
+    }
+    public function updateAnswer(Request $request)
+    {
+        try {
+            $client = new Client();
+            $result = $client->put(env('BASE_URL') . '/question-choices', [
+                'headers' => ['Content-type' => 'application/json'],
+                'json' => [
+                    'question_choice_text' => $request->question_choice_text,
+                    'id' => $request->id,
+                    'question_id' => $request->questions_id,
+                    'correct' => $request->correct,
+                ]
+            ]);
+
+            $rec = $result->getBody()->getContents();
+            return redirect('/company/exams');
+        } catch (\Exception $e) {
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
+                return redirect('/company/exams');
+            }
+            session()->flash('error', $e->getMessage());
+            return redirect('/company/exams');
+        }
+    }
+
+    public function examDelete(Request $request)
+    {
+        try {
+            $client = new Client();
+            $result = $client->delete(env('BASE_URL') . '/exams/'. $request->id, [
+                'headers' => ['Content-type' => 'application/json'],
+            ]);
+
+            $rec = $result->getBody()->getContents();
+            return redirect('/company/exams');
+        } catch (\Exception $e) {
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
+                return redirect('/company/exams');
+            }
+            session()->flash('error', $e->getMessage());
+            return redirect('/company/exams');
+        }
+    }
+
+    public function questionsDelete(Request $request)
+    {
+        try {
+            $client = new Client();
+            $result = $client->delete(env('BASE_URL') . '/questions/'. $request->id, [
+                'headers' => ['Content-type' => 'application/json'],
+            ]);
+
+            $rec = $result->getBody()->getContents();
+            return redirect('/company/exams');
+        } catch (\Exception $e) {
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
+                return redirect('/company/exams');
+            }
+            session()->flash('error', $e->getMessage());
+            return redirect('/company/exams');
+        }
+    }
+
+    public function answersDelete(Request $request)
+    {
+        try {
+            $client = new Client();
+            $result = $client->delete(env('BASE_URL') . '/question-choices/'. $request->id, [
+                'headers' => ['Content-type' => 'application/json'],
+            ]);
+
+            $rec = $result->getBody()->getContents();
+            return redirect('/company/exams');
+        } catch (\Exception $e) {
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
+                return redirect('/company/exams');
+            }
+            session()->flash('error', $e->getMessage());
+            return redirect('/company/exams');
+        }
+    }
+
+
 }

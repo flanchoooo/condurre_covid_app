@@ -1,0 +1,88 @@
+@extends('layouts.tab')
+
+@section('content')
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-lg-left">
+                                    <h1 class="h4 text-gray-900 mb-4">Answer for Q: {{session('question_text')}}</h1>
+                                    <hr>
+
+                                    <script>
+                                        $("document").ready(function(){
+                                            setTimeout(function(){
+                                                $("div.alert").remove();
+                                            },9000 ); // 5 secs
+
+                                        });
+                                    </script>
+
+                                    @if ($flash = session('error'))
+                                        <div  class="alert alert-danger" role="alert">
+                                            {{$flash}}
+                                        </div>
+                                    @endif
+
+
+                                    @if ($flash = session('success'))
+                                        <div  class="alert alert-success" role="alert">
+                                            {{$flash}}
+                                        </div>
+                                    @endif
+
+                                </div>
+
+                                <form method="POST" action="/exam/updates/answers">
+                                    @csrf
+                                    <div class="box-body">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12 mb-3 mb-sm-0">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Possible Answer</label>
+                                                    <input id="mobile" type="text" class="form-control{{ $errors->has('category_name') ? ' is-invalid' : '' }}" name="question_choice_text"  value="{{session('question_choice_text')}}" required autofocus >
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group" hidden>
+                                                <label for="exampleInputEmail1">Question</label>
+                                                <input id="mobile" type="text" class="form-control{{ $errors->has('category_name') ? ' is-invalid' : '' }}" name="id"  value="{{session('id')}}" required autofocus >
+                                            </div>
+
+                                            <div class="form-group" hidden>
+                                                <label for="exampleInputEmail1">Question</label>
+                                                <input id="mobile" type="text" class="form-control{{ $errors->has('category_name') ? ' is-invalid' : '' }}" name="questions_id"  value="{{session('questions_id')}}" required autofocus >
+                                            </div>
+
+
+
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Answer Status</label>
+                                                    <select id="mobile" type="text" class="form-control{{ $errors->has('category_name') ? ' is-invalid' : '' }}" name="correct"  required autofocus >
+                                                        <option value="false">INCORRECT ANSWER</option>
+                                                        <option value="true">CORRECT ANSWER</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">   {{ __('Submit') }}</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+@endsection

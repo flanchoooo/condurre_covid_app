@@ -13,6 +13,22 @@
                                     <h1 class="h4 text-gray-900 mb-4">Create Exam</h1>
                                     <hr>
                                 </div>
+
+                                <script>
+                                    $("document").ready(function(){
+                                        setTimeout(function(){
+                                            $("div.alert").remove();
+                                        },10000 ); // 5 secs
+
+                                    });
+                                </script>
+
+                                @if ($flash = session('error'))
+                                    <div  class="alert alert-danger" role="alert">
+                                        <center>{{$flash}}</center>
+                                    </div>
+                                @endif
+
                                 <a href="{{"/exam/create"}}"><label>Create</label> </a> <br>
 
                                 <br>
@@ -27,6 +43,7 @@
                                             <th>Exam</th>
                                             <th></th>
                                             <th></th>
+                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -36,17 +53,26 @@
                                                 <td>{{$record->company_name}}</td>
                                                 <td>{{$record->exam_title}}</td>
                                                 <td>
-                                                    <form role="form" action="/exam/id" method="POST">
-                                                        @csrf
-                                                        <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->id}}"  name="id" >
-                                                       <!-- <center><button type="submit" class="btn btn-success">Edit</button></center> -->
-                                                    </form>
-                                                </td>
-                                                <td>
                                                     <form role="form" action="/exam/questions" method="POST">
                                                         @csrf
                                                         <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->id}}"  name="id" >
-                                                        <center><button type="submit" class="btn btn-primary">Questions</button></center>
+                                                        <center><button type="submit" class="btn btn-primary">View Questions</button></center>
+                                                    </form>
+                                                </td>
+
+                                                <td>
+                                                    <form role="form" action="/exam/create/questions" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->id}}"  name="id" >
+                                                        <center><button type="submit" class="btn btn-success">Create Questions</button></center>
+                                                    </form>
+                                                </td>
+
+                                                <td>
+                                                    <form role="form" action="/exam/delete" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->id}}"  name="id" >
+                                                        <center><button type="submit" class="btn btn-danger">Delete Exam</button></center>
                                                     </form>
                                                 </td>
                                             </tr>

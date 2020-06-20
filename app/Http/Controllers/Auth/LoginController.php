@@ -90,6 +90,7 @@ class LoginController extends Controller
                     'password'          => $request->password,
                     'email'             => $request->login,
                 ],
+
             ]);
 
             $rec =  $result->getBody()->getContents();
@@ -106,8 +107,18 @@ class LoginController extends Controller
             return $this->sendFailedLoginResponse($request);
 
         }
-        catch (ClientException $e){
-            session()->flash('error','Invalid username or password.'.$e->getMessage());
+        catch (\Exception $e){
+            if( $e->getCode() == 401){
+                session()->flash('error','Invalid username or password');
+                return view('auth.login');
+            }
+
+            if( $e->getCode() == 404){
+                session()->flash('error','Invalid username or password');
+                return view('auth.login');
+            }
+
+            session()->flash('error','Contact Support:'.$e->getMessage());
             return view('auth.login');
         }
     }

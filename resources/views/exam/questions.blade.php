@@ -10,13 +10,10 @@
                         <div class="col-lg-12">
                             <div class="p-5">
                                 <div class="text-lg-left">
-                                    <h1 class="h4 text-gray-900 mb-4">Exam Questions & Possible Answers</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">Exam Questions</h1>
                                     <hr>
                                 </div>
-                                <a href="{{"/exam/create"}}"><label>Create</label> </a> <br>
-
                                 <br>
-
                                 <div class="box-body"  style="overflow-x:auto;">
                                     <!-- /.table-responsive -->
                                     <table class="table responsive" id="example" width="100%" cellspacing="0">
@@ -25,21 +22,51 @@
                                             <th>ID</th>
                                             <th>Question</th>
                                             <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
 
 
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($records as $record)
+                                        @foreach($records as $record)`
                                             <tr class="odd gradeX">
                                                 <td>{{$record->id}}</td>
                                                 <td>{{$record->question_text}}</td>
+
                                                 <td>
-                                                    <form role="form" action="/exam/questions/possible/answers" method="POST">
+                                                    <form role="form" action="/possible/answers" method="POST">
                                                         @csrf
                                                         <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->id}}"  name="id" >
                                                         <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->question_text}}"  name="question_text" >
-                                                        <center><button type="submit" class="btn btn-primary">Possible Answers</button></center>
+                                                        <center><button type="submit" class="btn btn-primary">View Answers</button></center>
+                                                    </form>
+                                                </td>
+
+                                                <td>
+                                                    <form role="form" action="/exam/create/answers" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->question_text}}"  name="question_text" >
+                                                        <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->id}}"  name="id" >
+                                                        <center><button type="submit" class="btn btn-success">Add Answers</button></center>
+                                                    </form>
+                                                </td>
+
+                                                <td>
+                                                    <form role="form" action="/exam/update/questions" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->id}}"  name="id" >
+                                                        <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->question_text}}"  name="question_text" >
+                                                        <center><button type="submit" class="btn btn-primary">Edit Question</button></center>
+                                                    </form>
+                                                </td>
+
+                                                <td>
+                                                    <form role="form" action="/questions/delete" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->id}}"  name="id" >
+                                                        <center><button type="submit" class="btn btn-danger">Delete Question</button></center>
                                                     </form>
                                                 </td>
                                             </tr>

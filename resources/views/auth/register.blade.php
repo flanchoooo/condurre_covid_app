@@ -12,7 +12,7 @@
                         <div class="col-lg-12">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <center><h2 class="h4 text-gray-900 mb-4"><img src="\logos.png"  style="max-width:60%;height:auto;"></h2></center>
+                                    <center><h2 class="h4 text-gray-900 mb-4"><img src="\logo.png"  style="max-width:30%;height:auto;"></h2></center>
                                     <hr>
                                     <h1 class="h4 text-gray-900 mb-4">Register</h1>
                                 </div>

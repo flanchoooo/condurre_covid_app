@@ -85,7 +85,6 @@ class RegisterController extends Controller
         try {
             $client = new Client();
             $result = $client->post('http://144.91.64.120:35600/api/company-admins', [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
                 'headers' => [
                     'Content-type' => 'application/json'
                 ],
@@ -97,15 +96,30 @@ class RegisterController extends Controller
                     'email'                 => $request->email,
                     'password'              => $request->password,
                 ],
+                [
+                    'exceptions' => true
+                ]
             ]);
-            //$rec =  $result->getBody()->getContents();
-           // $response = json_decode($rec);
+
             $this->validator($request->all())->validate();
             event(new Registered($user = $this->create($request->all())));
             session()->flash('registration_notification',  'User Account successfuly created.');
             return  redirect('/register');
         }
         catch (\Exception $e){
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('registration_notification', $response);
+                return  redirect('/register');
+            }
+
+            if($e->getCode() == 404){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('registration_notification', $response);
+                return  redirect('/register');
+            }
             session()->flash('registration_notification',  $e->getMessage());
             return  redirect('/register');
         }

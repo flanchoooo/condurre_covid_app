@@ -23,12 +23,21 @@
                                 <h3 class="h4 text-gray-900 mb-4"></h3>
                             </div>
 
+                            <script>
+                                $("document").ready(function(){
+                                    setTimeout(function(){
+                                        $("div.alert").remove();
+                                    },9000 ); // 5 secs
+
+                                });
+                            </script>
+
                             @if ($flash = session('error'))
                                 <div  class="alert alert-danger" role="alert">
                                     <center>{{$flash}}</center>
                                 </div>
                             @endif
-                            <center><h2 class="h4 text-gray-900 mb-4"><img src="\logos.png"  style="max-width:60%;height:auto;"></h2></center>
+                            <center><h2 class="h4 text-gray-900 mb-4"><img src="\logo.png"  style="max-width:30%;height:auto;"></h2></center>
                             <hr>
                             <center><h2 class="h4 text-gray-900 mb-4">Login</h2></center>
 

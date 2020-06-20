@@ -13,10 +13,7 @@
                                     <h1 class="h4 text-gray-900 mb-4">Q: {{session('question_text')}}</h1>
                                     <hr>
                                 </div>
-                                <a href="{{"/exam/create"}}"><label>Create</label> </a> <br>
-
                                 <br>
-
                                 <div class="box-body"  style="overflow-x:auto;">
                                     <!-- /.table-responsive -->
                                     <table class="table responsive" id="example" width="100%" cellspacing="0">
@@ -26,9 +23,8 @@
                                             <th>Correct</th>
                                             <th>Answer</th>
                                             <th></th>
-
-
-                          ol              </tr>
+                                            <th></th>
+                                      </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($records as $record)
@@ -44,10 +40,18 @@
                                                 <td>{{$record->question_choice_text}}</td>
 
                                                 <td>
-                                                    <form role="form" action="/exam/questions/possible/answers" method="POST">
+                                                    <form role="form" action="/exam/update/answers" method="POST">
                                                         @csrf
                                                         <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->id}}"  name="id" >
-                                                        <center><button type="submit" class="btn btn-primary">Possible Answers</button></center>
+                                                        <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->question_choice_text}}"  name="question_choice_text" >
+                                                        <center><button type="submit" class="btn btn-primary">Edit Answers</button></center>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form role="form" action="/answers/delete" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" class="form-control"  placeholder="Company Name" value="{{$record->id}}"  name="id" >
+                                                        <center><button type="submit" class="btn btn-danger">Delete Answers</button></center>
                                                     </form>
                                                 </td>
                                             </tr>
