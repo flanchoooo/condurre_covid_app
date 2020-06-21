@@ -85,7 +85,6 @@ class LoginController extends Controller
         try {
             $client = new Client();
             $result = $client->post(env('BASE_URL').'/company-admins/login', [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
                 'headers' => ['Content-type' => 'application/json',],
                 'json' => [
                     'password'          => $request->password,
@@ -112,15 +111,28 @@ class LoginController extends Controller
 
         }
         catch (\Exception $e){
-            if( $e->getCode() == 401){
-                session()->flash('error','Invalid username or password');
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
                 return view('auth.login');
             }
 
-            if( $e->getCode() == 404){
-                session()->flash('error','Invalid username or password');
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
                 return view('auth.login');
             }
+
+            if($e->getCode() == 401){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
+                return view('auth.login');
+            }
+
+
 
             session()->flash('error','Contact Support:'.$e->getMessage());
             return view('auth.login');
