@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class CondurreAppController extends Controller
 {
@@ -14,11 +18,17 @@ class CondurreAppController extends Controller
 
     public function displayCompanies()
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->get(env('BASE_URL') . '/companies?page=0&size=1000000', [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                  'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'size' => 10000
                 ]
@@ -39,11 +49,17 @@ class CondurreAppController extends Controller
 
     public function createsCompany(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->post(env('BASE_URL') . '/companies', [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'name' => $request->name,
                     'longitute' => 0,
@@ -60,11 +76,17 @@ class CondurreAppController extends Controller
 
     public function companyById(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->get(env('BASE_URL') . '/companies/' . $request->id, [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
             ]);
             $rec = $result->getBody()->getContents();
             $response = json_decode($rec);
@@ -79,11 +101,17 @@ class CondurreAppController extends Controller
 
     public function updatesCompany(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->put(env('BASE_URL') . '/companies', [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'name' => $request->name,
                     'longitute' => 0,
@@ -101,10 +129,19 @@ class CondurreAppController extends Controller
 
     public function displayExams()
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
+
         try {
             $client = new Client();
-            $result = $client->get(env('BASE_URL') . '/exams?page=0&size=1000000', [
-                'headers' => ['Content-type' => 'application/json'],
+            $result = $client->get(env('BASE_URL') . '/exams/company-admin/'.Auth::user()->user_external_id.'?page=0&size=1000000', [
+                'headers' => [
+                    'Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'size' => 10000
                 ]
@@ -131,15 +168,21 @@ class CondurreAppController extends Controller
 
     public function createsExam(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->post(env('BASE_URL') . '/exams', [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'exam_title' => $request->name,
                     'duration' => 30,
-                    'company_admin_id' => 21,
+                    'company_admin_id' => Auth::user()->user_external_id,
                 ]
             ]);
             $rec = $result->getBody()->getContents();
@@ -158,11 +201,17 @@ class CondurreAppController extends Controller
 
     public function examById(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->get(env('BASE_URL') . '/exams/' . $request->id, [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
             ]);
             $rec = $result->getBody()->getContents();
             $response = json_decode($rec);
@@ -183,16 +232,21 @@ class CondurreAppController extends Controller
 
     public function updatesExam(Request $request)
     {
-        // return $request->all();
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->put(env('BASE_URL') . '/exams', [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'exam_title' => $request->name,
                     'duration' => 30,
-                    'company_admin_id' => 21,
+                    'company_admin_id' => Auth::user()->user_external_id,
                     'id' => $request->id,
                 ]
             ]);
@@ -212,11 +266,17 @@ class CondurreAppController extends Controller
 
     public function examQuestions(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->get(env('BASE_URL') . '/exams/' . $request->id, [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
             ]);
             $rec = $result->getBody()->getContents();
             session()->flash('exam_id',$request->id);
@@ -237,11 +297,17 @@ class CondurreAppController extends Controller
     public function possibleAnswers(Request $request)
     {
 
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->get(env('BASE_URL') . '/questions/' . $request->id, [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
             ]);
             $rec = $result->getBody()->getContents();
             $response = json_decode($rec);
@@ -265,11 +331,17 @@ class CondurreAppController extends Controller
     ///// COMPANY ADMINS
     public function displayCompaniesAdmin()
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->get(env('BASE_URL') . '/companies?page=0&size=1000000', [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'size' => 10000
                 ]
@@ -285,11 +357,17 @@ class CondurreAppController extends Controller
 
     public function companyAdminsById(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->get(env('BASE_URL') . '/companies/' . $request->id, [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
             ]);
             $rec = $result->getBody()->getContents();
             $response = json_decode($rec);
@@ -304,36 +382,62 @@ class CondurreAppController extends Controller
 
     public function createCompanyAdmin(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->post(env('BASE_URL') . '/company-admins', [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'company_id' => $request->input('company_id'),
-                    'first_name' => $request->input('first_name'),
+                    'first_name' => $request->name,
                     'last_name' => $request->input('last_name'),
                     'middle_names' => $request->input('middle_names'),
                     'email' => $request->input('email'),
                     'password' => $request->input('password'),
                 ]
             ]);
-            $rec = $result->getBody()->getContents();
+            $rec = json_decode($result->getBody()->getContents());
+            $user_external_id = $rec->model->id;
+            $admins = new User();
+            $admins->name = $request->first_name.' '.$request->last_name;
+            $admins->email = $request->email;
+            $admins->username = $request->first_name;
+            $admins->password = Hash::make($request->password);
+            $admins->user_external_id = $user_external_id;
+            $admins->role_permissions_id = 1;
+            $admins->save();
             return redirect('/company-admin/display');
         } catch (\Exception $e) {
+            if($e->getCode() == 400){
+                $exception = $e->getResponse()->getBody();
+                $response = json_decode($exception)->description;
+                session()->flash('error', $response);
+                return redirect('/company-admin/display');
+            }
             session()->flash('registration_notification', $e->getMessage());
             return redirect('/company-admin/display');
-            //return redirect()->back();
         }
     }
 
     public function companyAdminsViewByCompanyId(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->get(env('BASE_URL') . '/company-admins?page=0&size=1000000', [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'size' => 10000
                 ]
@@ -351,11 +455,17 @@ class CondurreAppController extends Controller
 
     public function updateCompanyAdmins(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->get(env('BASE_URL') . '/company-admins/' . $request->input('id'), [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
             ]);
             $rec = $result->getBody()->getContents();
             $response = json_decode($rec);
@@ -368,12 +478,17 @@ class CondurreAppController extends Controller
 
     public function updateCompanyAdminsPost(Request $request)
     {
-        // return $request->all();
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->put(env('BASE_URL') . '/company-admins', [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'id' => $request->input('id'),
                     'first_name' => $request->input('first_name'),
@@ -386,7 +501,6 @@ class CondurreAppController extends Controller
              $rec = $result->getBody()->getContents();
             return redirect('/exam/display');
         } catch (\Exception $e) {
-            return $e;
             session()->flash('error', $e->getMessage());
             return redirect()->back();
         }
@@ -396,11 +510,17 @@ class CondurreAppController extends Controller
     ///// VISITORS
     public function displayVisitors()
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->get(env('BASE_URL') . '/visitors?page=0&size=1000000', [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'size' => 10000
                 ]
@@ -416,11 +536,17 @@ class CondurreAppController extends Controller
 
     public function displayVisitorById(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->get(env('BASE_URL') . '/visitors/' . $request->input('id'), [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'size' => 10000
                 ]
@@ -435,11 +561,17 @@ class CondurreAppController extends Controller
     }
 
     public function updateVisitor(Request $request){
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->put(env('BASE_URL') . '/visitors', [
-                //'auth' => [ env('AUTH_USER_NAME'),env('AUTH_PASSWORD')],
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'id' => $request->input('id'),
                     'first_name' => $request->input('first_name'),
@@ -467,10 +599,17 @@ class CondurreAppController extends Controller
 
     public function createsQuestions(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->post(env('BASE_URL') . '/questions', [
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'question_text' => $request->question_text,
                     'active' => $request->active,
@@ -496,11 +635,17 @@ class CondurreAppController extends Controller
 
     public function updatesQuestions(Request $request)
     {
-
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->put(env('BASE_URL') . '/questions', [
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'id' => $request->question_id,
                     'exam_id' => $request->question_id,
@@ -508,7 +653,7 @@ class CondurreAppController extends Controller
                     'difficult_level' => $request->difficult_level,
                     'active' => $request->active,
                     'duration' => 30,
-                    'company_admin_id' => 21,
+                    'company_admin_id' => Auth::user()->user_external_id,
 
                 ]
             ]);
@@ -531,11 +676,17 @@ class CondurreAppController extends Controller
 
     public function createsAnswers(Request $request)
     {
-     //   return $request->all();
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->post(env('BASE_URL') . '/question-choices', [
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'question_choice_text'  => $request->question_choice_text,
                     'question_id'           => $request->question_id,
@@ -566,10 +717,17 @@ class CondurreAppController extends Controller
     }
     public function updateAnswer(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->put(env('BASE_URL') . '/question-choices', [
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
                 'json' => [
                     'question_choice_text' => $request->question_choice_text,
                     'id' => $request->id,
@@ -594,10 +752,17 @@ class CondurreAppController extends Controller
 
     public function examDelete(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->delete(env('BASE_URL') . '/exams/'. $request->id, [
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
             ]);
 
             $rec = $result->getBody()->getContents();
@@ -616,10 +781,17 @@ class CondurreAppController extends Controller
 
     public function questionsDelete(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->delete(env('BASE_URL') . '/questions/'. $request->id, [
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
             ]);
 
             $rec = $result->getBody()->getContents();
@@ -638,10 +810,17 @@ class CondurreAppController extends Controller
 
     public function answersDelete(Request $request)
     {
+        session_start();
+        if(!isset($_SESSION['token'])){
+            Auth::logout();
+            return redirect('/login');
+        }
         try {
             $client = new Client();
             $result = $client->delete(env('BASE_URL') . '/question-choices/'. $request->id, [
-                'headers' => ['Content-type' => 'application/json'],
+                'headers' => ['Content-type' => 'application/json',
+                    'Authorization' => 'Bearer '.$_SESSION['token'],
+                ],
             ]);
 
             $rec = $result->getBody()->getContents();
@@ -657,6 +836,5 @@ class CondurreAppController extends Controller
             return redirect('/company/exams');
         }
     }
-
 
 }

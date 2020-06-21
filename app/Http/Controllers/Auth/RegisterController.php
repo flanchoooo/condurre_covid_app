@@ -101,6 +101,9 @@ class RegisterController extends Controller
                 ]
             ]);
 
+          $rec = json_decode($result->getBody()->getContents());
+
+          $user_external_id = $rec->model->id;
             $this->validator($request->all())->validate();
             event(new Registered($user = $this->create($request->all())));
             session()->flash('registration_notification',  'User Account successfuly created.');

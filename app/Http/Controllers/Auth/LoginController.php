@@ -81,6 +81,7 @@ class LoginController extends Controller
 
     protected function login(Request $request)
     {
+        session_start();
         try {
             $client = new Client();
             $result = $client->post(env('BASE_URL').'/company-admins/login', [
@@ -95,6 +96,9 @@ class LoginController extends Controller
 
             $rec =  $result->getBody()->getContents();
             $response = json_decode($rec);
+
+            $accessToken = $response->model->token->access_token;
+            $_SESSION["token"] = $accessToken;
             $this->validateLogin($request);
             if ($this->hasTooManyLoginAttempts($request)) {
                 $this->fireLockoutEvent($request);
