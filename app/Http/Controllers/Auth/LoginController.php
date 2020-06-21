@@ -84,7 +84,7 @@ class LoginController extends Controller
         session_start();
         try {
             $client = new Client();
-            $result = $client->post(env('BASE_URL').'/company-admins/login', [
+            $result = $client->post("http://144.91.64.120:35610/api/company-admins/login", [
                 'headers' => ['Content-type' => 'application/json',],
                 'json' => [
                     'password'          => $request->password,
@@ -131,8 +131,6 @@ class LoginController extends Controller
                 session()->flash('error', $response);
                 return view('auth.login');
             }
-
-
 
             session()->flash('error','Contact Support:'.$e->getMessage());
             return view('auth.login');
