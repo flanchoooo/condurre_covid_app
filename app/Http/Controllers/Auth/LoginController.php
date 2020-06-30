@@ -131,7 +131,6 @@ class LoginController extends Controller
                 session()->flash('error', $response);
                 return view('auth.login');
             }
-
             session()->flash('error','Contact Support:'.$e->getMessage());
             return view('auth.login');
         }
