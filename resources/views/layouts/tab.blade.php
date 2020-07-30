@@ -15,6 +15,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
+    <link href="{{asset('css/bs-enhance.css')}}" rel="stylesheet">
     <link href="{{asset('datatable/datatable.css')}}" rel="stylesheet">
     <link href="{{asset('datatable/buttons.css')}}" rel="stylesheet">
     <script type="text/javascript" src="{{asset('js/button.js')}}"></script>
@@ -49,7 +50,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav blue accent-3 white-text sidebar accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
@@ -57,7 +58,7 @@
 
 
             </div>
-            <div class="sidebar-brand-text mx-3">Condurre App</div>
+            <div class="sidebar-brand-text mx-3 white-text">Condurre App</div>
         </a>
 
 
@@ -78,7 +79,7 @@
 
                      }else{
 
-                    echo $display = ' <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dash" aria-expanded="true" aria-controls="collapseTwo">
+                    echo $display = ' <a class="nav-link collapsed white-text" href="#" data-toggle="collapse" data-target="#dash" aria-expanded="true" aria-controls="collapseTwo">
                                          <i class="fas fa-fw fa-tachometer-alt"></i>
                                         <span>Dashboard & Reports</span>
                                        </a>';
@@ -450,7 +451,7 @@
 
                       else{
 
-                     echo $display = ' <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#loans" aria-expanded="true" aria-controls="collapseTwo">
+                     echo $display = ' <a class="nav-link collapsed white-text" href="#" data-toggle="collapse" data-target="#loans" aria-expanded="true" aria-controls="collapseTwo">
                                        <i class="fas fa-fw fa-dollar-sign"></i>
                                          <span>Company</span>
                                         </a>';
@@ -469,7 +470,7 @@
                               }else{
 
 
-                            echo $display = '<a class="collapse-item" href="/company/display">Company Management</a>';
+                            echo $display = '<a class="collapse-item " href="/company/display">Company Management</a>';
                             echo $display = '<a class="collapse-item" href="/company/exams">Exam Configurations</a>';
 
                              }
@@ -753,7 +754,7 @@
 
                       }else{
 
-                     echo $display = ' <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#configs" aria-expanded="true" aria-controls="collapsePages">
+                     echo $display = ' <a class="nav-link collapsed white-text" href="#" data-toggle="collapse" data-target="#configs" aria-expanded="true" aria-controls="collapsePages">
                                       <i class="fas fa-fw fa-cogs"></i>
                                       <span>System Configuration</span>
                                      </a>';
@@ -860,9 +861,9 @@
 
                       }else{
 
-                     echo $display = ' <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users" aria-expanded="true" aria-controls="collapsePages">
+                     echo $display = ' <a class="nav-link collapsed white-text" href="#" data-toggle="collapse" data-target="#users" aria-expanded="true" aria-controls="collapsePages">
                                       <i class="fas fa-fw fa-user"></i>
-                                      <span>Users & Access Control</span>
+                                      <span>Access Control</span>
                                      </a>';
                      }
             @endphp

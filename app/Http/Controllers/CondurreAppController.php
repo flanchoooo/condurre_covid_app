@@ -147,7 +147,9 @@ class CondurreAppController extends Controller
                 ]
             ]);
             $rec = $result->getBody()->getContents();
+
             $response = json_decode($rec);
+
             return view('exam.display')->with('records', $response->pageable->content);
         } catch (\Exception $e) {
             if($e->getCode() == 400){
