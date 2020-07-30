@@ -98,6 +98,7 @@ class LoginController extends Controller
 
             $accessToken = $response->model->token->access_token;
             $_SESSION["token"] = $accessToken;
+            session(['token' => $accessToken]);
             $this->validateLogin($request);
             if ($this->hasTooManyLoginAttempts($request)) {
                 $this->fireLockoutEvent($request);

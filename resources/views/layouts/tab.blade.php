@@ -12,6 +12,8 @@
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css' ) }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('datatable/font.css' ) }}" rel="stylesheet" type="text/css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
@@ -1066,7 +1068,10 @@
 
             </nav>
 
-            @yield('content')
+            <div id="app">
+                @yield('content')
+            </div>
+
 
         </div>
         <!-- End of Main Content -->
@@ -1120,6 +1125,7 @@
 </body>
 <!--Dropdown Side bar menu-->
 <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
 <!-- Custom scripts for all pages-->
 <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
