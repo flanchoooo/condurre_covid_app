@@ -16,13 +16,47 @@ class VisitController extends Controller
         $company = CompanyAdmin::whereEmail(Auth::user()->email)->first();
 
 
-        return DB::connection('mysql2')
+        $dates =  DB::connection('mysql2')
             ->select(DB::raw("SELECT DATE(created_date) as 'day',
                                 AVG(temperature) as 'temp'
                                 FROM visit 
                                 WHERE company_id = :company_id
                                 GROUP BY DATE(created_date)"), array('company_id' => $company->company_id));
+        $new_data = [];
+        foreach ($dates as $date){
+            array_push($new_data,[$date->day=>$date->temp]);
+        }
+
+        $merged = call_user_func_array('array_merge', $new_data);
+
+        return $merged;
+
+
 
 
     }
+    public function getVisitCount()
+    {
+
+        $company = CompanyAdmin::whereEmail(Auth::user()->email)->first();
+
+        $dates =  DB::connection('mysql2')
+            ->select(DB::raw("SELECT DATE(created_date) as 'day',
+                                COUNT(temperature) as 'count'
+                                FROM visit 
+                                WHERE company_id = :company_id
+                                GROUP BY DATE(created_date)"), array('company_id' => $company->company_id));
+        $new_data = [];
+        foreach ($dates as $date){
+            array_push($new_data,[$date->day=>$date->count]);
+        }
+
+        $merged = call_user_func_array('array_merge', $new_data);
+        return $merged;
+
+
+
+
+    }
+
 }
