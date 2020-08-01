@@ -57,16 +57,16 @@ return [
 
         'mysql2' => [
             'driver' => 'mysql',
-            'host' => env('IB_DB_HOST', '127.0.0.1'),
-            'port' => env('IB_DB_PORT', '3306'),
-            'database' => env('IB_DB_DATABASE', ''),
-            'username' => env('IB_DB_USERNAME', ''),
-            'password' => env('IB_DB_PASSWORD', ''),
+            'host' => env('144.91.64.120', '144.91.64.120'),
+            'port' => env('3306', '3306'),
+            'database' => env('questionnaire', 'questionnaire'),
+            'username' => env('developer', 'developer'),
+            'password' => env('ch@ng3itDev', 'ch@ng3itDev'),
             'unix_socket' => env('IB_DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
-            'strict' => true,
+            'strict' => false,
             'engine' => null,
         ],
 

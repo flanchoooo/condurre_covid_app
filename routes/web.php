@@ -112,6 +112,9 @@ Route::any("/exam/creates/questions", 'CondurreAppController@createsQuestions');
 Route::any("/exam/update/questions", 'CondurreAppController@updateQuestions');
 Route::any("/exam/updates/questions", 'CondurreAppController@updatesQuestions');
 
+
+Route::any("/avg", 'VisitController@getAverageTemperature');
+
 //Answers
 Route::any("/exam/create/answers", 'CondurreAppController@createAnswers');
 Route::any("/exam/creates/answer", 'CondurreAppController@createsAnswers');
