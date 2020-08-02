@@ -70,14 +70,14 @@ return [
             'engine' => null,
         ],
 
-        'mysql3' => [
+        'questions' => [
             'driver' => 'mysql',
-            'host' => env('B_DB_HOST', '127.0.0.1'),
-            'port' => env('B_DB_PORT', '3306'),
-            'database' => env('B_DB_DATABASE', ''),
-            'username' => env('B_DB_USERNAME', ''),
-            'password' => env('B_DB_PASSWORD', ''),
-            'unix_socket' => env('B_DB_SOCKET', ''),
+            'host' => env('I_DB_HOST', '127.0.0.1'),
+            'port' => env('I_DB_PORT', '3306'),
+            'database' => env('I_DB_DATABASE', ''),
+            'username' => env('I_DB_USERNAME', ''),
+            'password' => env('I_DB_PASSWORD', ''),
+            'unix_socket' => env('I_DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',

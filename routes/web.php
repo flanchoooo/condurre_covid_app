@@ -32,15 +32,8 @@ Route::get('/access/state', ['uses' => 'AccessController@index', 'as' => 'Admin'
 Route::post('/access/status', ['uses' => 'AccessController@status', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
 Route::get('/test/test', ['uses' => 'AccessController@test', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
 
-//Logs
-Route::get('/logs/display', ['uses' => 'LogsController@index', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
 
 
-//Cues
-Route::get('/cues/display', ['uses' => 'KeyController@index', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
-Route::get('/cues/create', ['uses' => 'KeyController@creatview', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
-Route::post('/cues/creates', ['uses' => 'KeyController@creates', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
-Route::post('/cues/delete', ['uses' => 'KeyController@destroy', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
 
 
 //Guest User
@@ -49,22 +42,6 @@ Route::get('/access/userhome', ['uses' => 'UserHomeController@index' ]);
 //statistics
 Route::post('/statistics', ['uses' => 'StatisticsController@index', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
 
-
-
-
-
-//PIN Reset
-Route::GET('/wallet/reset_view', ['uses' => 'WalletManagementController@reset_view', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
-Route::POST('/wallet/reset', ['uses' => 'WalletManagementController@reset', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
-Route::POST('/wallet/reset_preauth', ['uses' => 'WalletManagementController@reset_preauth', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
-
-
-//Authentication Services
-Route::GET('/authentication/display', ['uses' => 'AuthenticationServiceController@display', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
-Route::GET('/authentication/createview', ['uses' => 'AuthenticationServiceController@create_view', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
-Route::POST('/authentication/create', ['uses' => 'AuthenticationServiceController@create', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
-Route::POST('/authentication/updateview', ['uses' => 'AuthenticationServiceController@updateview', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
-Route::POST('/authentication/update', ['uses' => 'AuthenticationServiceController@update', 'as' => 'Admin', 'middleware' => 'role', 'roles' => ['Admin']]);
 
 
 //Authentication Roles Services
@@ -129,9 +106,6 @@ Route::any("/answers/delete", 'CondurreAppController@answersDelete');
 
 
 
-
-
-
 //Company
 Route::get('/company-admin/display', 'CondurreAppController@displayCompaniesAdmin');
 Route::post('/company-admin/id', 'CondurreAppController@companyAdminsById');
@@ -144,6 +118,7 @@ Route::post('/company-admin/updates', 'CondurreAppController@updateCompanyAdmins
 Route::get('/visitors/display', 'CondurreAppController@displayVisitors');
 Route::post('/visitor-edit', 'CondurreAppController@displayVisitorById');
 Route::post('/visitor/updates', 'CondurreAppController@updateVisitor');
+Route::any('/visits', 'CondurreAppController@visits');
 
 
 

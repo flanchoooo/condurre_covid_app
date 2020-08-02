@@ -10681,9 +10681,9 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background-color: #d1d3e2;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #d1d3e2), to(#f9fbfd));
-  background-image: linear-gradient(180deg, #d1d3e2 30%, #9d9eb1 80%);
+  background-color: #2979FF;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #2979FF), to(#2979FF));
+  background-image: linear-gradient(180deg, #2979FF 30%, #2979FF 80%);
   background-size: cover;
 }
 

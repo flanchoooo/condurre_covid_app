@@ -53,6 +53,37 @@
 
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <div class="form-group">
+                                                    <label for="exampleInputEmail1">Duration</label>
+                                                    <input id="mobile" type="text" class="form-control{{ $errors->has('category_name') ? ' is-invalid' : '' }}" name="duration"  required autofocus >
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Pass Matrix In Percentage</label>
+                                                    <input id="mobile" type="text" class="form-control{{ $errors->has('category_name') ? ' is-invalid' : '' }}" name="pass_matrix"  required autofocus >
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Allowed Exam Retakes</label>
+                                                    <input id="mobile" type="text" class="form-control{{ $errors->has('category_name') ? ' is-invalid' : '' }}" name="allowed_retakes"  required autofocus >
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Take Temperature</label>
+                                                    <select id="mobile" type="text" class="form-control{{ $errors->has('category_name') ? ' is-invalid' : '' }}" name="take_temperature"  required autofocus >
+                                                        <option value="true">TAKE TEMPERATURE</option>
+                                                        <option value="false">DO NOT TAKE TEMPERATURE</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <div class="form-group">
                                                 </div>
                                             </div>
                                         </div>

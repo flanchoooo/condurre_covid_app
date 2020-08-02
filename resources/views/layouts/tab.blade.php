@@ -101,7 +101,7 @@
 
 
                           echo $display = '<a class="collapse-item" href="/home/page">Dashboards</a>';
-                          echo $display = '<a class="collapse-item" href="/home/page">Visit Reports</a>';
+                          echo $display = '<a class="collapse-item" href="/visits">Visit Reports</a>';
 
                              }
                     @endphp
@@ -454,15 +454,15 @@
                       else{
 
                      echo $display = ' <a class="nav-link collapsed white-text" href="#" data-toggle="collapse" data-target="#loans" aria-expanded="true" aria-controls="collapseTwo">
-                                       <i class="fas fa-fw fa-dollar-sign"></i>
-                                         <span>Company</span>
+                                       <i class="fas fa-fw fa-stream"></i>
+                                         <span>Exam Configurations</span>
                                         </a>';
                      }
             @endphp
 
             <div id="loans" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Company Management</h6>
+                    <h6 class="collapse-header">Exam Configurations</h6>
 
 
                     @php
@@ -472,7 +472,7 @@
                               }else{
 
 
-                            echo $display = '<a class="collapse-item " href="/company/display">Company Management</a>';
+                           // echo $display = '<a class="collapse-item " href="/company/display">Company Management</a>';
                             echo $display = '<a class="collapse-item" href="/company/exams">Exam Configurations</a>';
 
                              }
@@ -863,10 +863,11 @@
 
                       }else{
 
-                     echo $display = ' <a class="nav-link collapsed white-text" href="#" data-toggle="collapse" data-target="#users" aria-expanded="true" aria-controls="collapsePages">
+                     /*echo $display = ' <a class="nav-link collapsed white-text" href="#" data-toggle="collapse" data-target="#users" aria-expanded="true" aria-controls="collapsePages">
                                       <i class="fas fa-fw fa-user"></i>
                                       <span>Access Control</span>
                                      </a>';
+                     */
                      }
             @endphp
 

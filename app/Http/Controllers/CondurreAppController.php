@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\CompanyAdmin;
+use App\Questionnaire;
 use App\User;
+use App\Visit;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -182,9 +185,12 @@ class CondurreAppController extends Controller
                               'Authorization' => 'Bearer ' . $_SESSION['token'],
                 ],
                 'json'    => [
-                    'exam_title'       => $request->name,
-                    'duration'         => 30,
-                    'company_admin_id' => Auth::user()->user_external_id,
+                    'exam_title'        => $request->name,
+                    'duration'          => $request->duration,
+                    'pass_matrix'       => $request->pass_matrix,
+                    'allowed_retakes'   => $request->allowed_retakes,
+                    'take_temperature'  => $request->take_temperature,
+                    'company_admin_id'  => Auth::user()->user_external_id,
                 ]
             ]);
             $rec = $result->getBody()->getContents();
@@ -844,6 +850,14 @@ class CondurreAppController extends Controller
             session()->flash('error', $e->getMessage());
             return redirect('/company/exams');
         }
+    }
+
+
+    public function visits(){
+        $company_id = CompanyAdmin::whereId(Auth::user()->user_external_id)->first();
+        $visit = Visit::whereCompanyId($company_id->company_id)->paginate(10);
+        return view('visits.visits')->with('records', $visit);
+
     }
 
 }
